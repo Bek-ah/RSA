@@ -11,7 +11,7 @@ def mod_exp(x: int, y: int, N: int) -> int:
     if y % 2 == 0:
         return (z ** 2) % N
     else:
-        return x * (z ** 2) % N
+        return (x * (z ** 2)) % N
 
 def fermat(N: int, k: int) -> bool:
     a = random.randint(2,N)
@@ -42,7 +42,7 @@ def miller_rabin(N: int, k: int) -> bool:
 def generate_large_prime(n_bits: int) -> int:
     while(True):
         possible = random.getrandbits(n_bits)
-        if fermat(possible,5):
+        if fermat(possible,20):
             return possible
 
 def main(n_bits: int):

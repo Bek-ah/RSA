@@ -40,14 +40,10 @@ def greatest_common_divisor(a: int, b: int):
     return greatest_common_divisor(b, a % b)
 
 def extended_euclid(a: int, b: int) -> tuple[int, int, int]:
-    if a < b:
-        temp = a
-        a = b
-        b = temp
     if b == 0:
         return 1, 0, a
     [x,y,d] = extended_euclid(b, a % b)
-    return y, x - (a // b) * y, d
+    return y, x - (a // b) * y, d # inverse of a, inverse of b, d = GCD(a,b)
 
 def generate_key_pairs(n_bits) -> tuple[int, int, int]:
     """
@@ -60,9 +56,14 @@ def generate_key_pairs(n_bits) -> tuple[int, int, int]:
     p = prime_number_generation.generate_large_prime(n_bits)
     q = prime_number_generation.generate_large_prime(n_bits)
     N = p * q
-    index = random.randint(0,24)
-    e = primes[index]
-    x, y, d = extended_euclid(p, e)
+    e = 2
+    m = (p-1) * (q-1)
+    while greatest_common_divisor(e, m) > 1:
+        index = random.randint(0, 24)
+        e = primes[index]
+    d, y, g = extended_euclid(e, m) #d will be in the same order as e in parameter
+    if d < 0:
+        d = m + d
     return N, e, d
 
 
