@@ -1,5 +1,7 @@
+import random
 import sys
 from time import time
+import prime_number_generation
 
 # When trying to find a relatively prime e for (p-1) * (q-1)
 # use this list of 25 primes
@@ -32,6 +34,20 @@ primes = [
     97,
 ]
 
+def greatest_common_divisor(a: int, b: int):
+    if b == 0:
+        return a
+    return greatest_common_divisor(b, a % b)
+
+def extended_euclid(a: int, b: int) -> tuple[int, int, int]:
+    if a < b:
+        temp = a
+        a = b
+        b = temp
+    if b == 0:
+        return 1, 0, a
+    [x,y,d] = extended_euclid(b, a % b)
+    return y, x - (a // b) * y, d
 
 def generate_key_pairs(n_bits) -> tuple[int, int, int]:
     """
@@ -41,6 +57,15 @@ def generate_key_pairs(n_bits) -> tuple[int, int, int]:
     Computes e and d such that e*d = 1 mod (p-1)(q-1)
     Return N, e, and d
     """
+    p = prime_number_generation.generate_large_prime(n_bits)
+    q = prime_number_generation.generate_large_prime(n_bits)
+    N = p * q
+    index = random.randint(0,24)
+    e = primes[index]
+    x, y, d = extended_euclid(p, e)
+    return N, e, d
+
+
 
 
 def main(n_bits: int, filename_stem: str):
