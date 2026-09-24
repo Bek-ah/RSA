@@ -1,5 +1,5 @@
 from byu_pytest_utils import compute_coefficient
-
+import matplotlib
 
 def main():
 
@@ -12,7 +12,7 @@ def main():
 
     def theoretical_big_o(n):
         # FILL THIS IN with your theoretical time complexity in terms of n
-        return 1
+        return n**3
 
     # Changing these values takes a slice of your runtimes corresponding with the indices
 
