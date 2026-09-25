@@ -6,10 +6,10 @@ def main():
 
     # COMMENT AND UNCOMMENT appropriate lines as necessary
 
-    filename = "_large_primes_runtimes.json"
-    # filename = '_keypair_runtimes.json'
-    # filename = '_encrypt_runtimes.json'
-    # filename = '_decrypt_runtimes.json'
+    #filename = "_large_primes_runtimes.json"
+    filename = '_keypair_runtimes.json'
+    #filename = '_encrypt_runtimes.json'
+    filename = '_decrypt_runtimes.json'
 
     with open(filename, "r") as f:
         runtimes = json.load(f)
@@ -37,10 +37,10 @@ def main():
     plt.legend(["Observed", "Theoretical O(n^3)"])
     plt.xlabel("n")
     plt.ylabel("Runtime (sec)")
-    plt.title("Time for Generate Large Primes")
+    plt.title("Time for Key Generation Runtimes")
 
     fig.show()
-    fig.savefig("empiricalPrimes.svg")
+    fig.savefig("empiricalKeys.svg")
 
 
 if __name__ == "__main__":

@@ -26,9 +26,7 @@ def miller_rabin(N: int, k: int) -> bool:
     Returns True if N is prime
     """
     d = N - 1
-    s = 0
     a = random.randint(2, N - 1)
-#    d = (N-1) / 2 ** k
     for i in range(k):
         if N % 2 == 0:
             return False
@@ -51,6 +49,12 @@ def main(n_bits: int):
     print(large_prime)
     print(f'Generation took {time() - start} seconds')
 
+def main2(n_bits: int):
+    start = time()
+    x = miller_rabin(n_bits,7)
+    print(x)
+    print(f'Generation took {time() - start} seconds')
+
 
 if __name__ == '__main__':
-    main(int(sys.argv[1]))
+    main2(int(sys.argv[1]))
